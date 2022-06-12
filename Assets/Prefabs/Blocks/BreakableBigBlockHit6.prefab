@@ -107,7 +107,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8101adfa1bfe540579607d0846c44a1c, type: 3}
   - {fileID: 21300000, guid: b4388a260d4be47948cbdf74b0094836, type: 3}
   - {fileID: 21300000, guid: 9bad229c980bb4e639ea68b2b21f5998, type: 3}
-  itemDropRate: 10
+  itemDropRate: 75
   dropItems:
   - {fileID: 3387945024605791033, guid: 56573bafb01a1124399666c7a9d3fe74, type: 3}
   - {fileID: 404981231445174917, guid: 924980378a77fa744b3e389115d8650a, type: 3}

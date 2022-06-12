@@ -36,14 +36,14 @@ public class EffectManager : MonoBehaviour
     public void AddEffect(Effect effect, EffectType effectType)
     {
         int index = FindSameEffectIndex(effect.name);
-        float times = 0f;
-        float value = 0f;
+        float times = effect.times;
+        float value = effect.value;
         switch (effectType)
         {
             case EffectType.Stack:
             {
-                value = _effects[index].value + effect.value;
-                times = _effects[index].times + effect.times;
+                value += _effects[index].value;
+                times += _effects[index].times;
                 break;
             }
             case EffectType.Adding:
@@ -54,12 +54,12 @@ public class EffectManager : MonoBehaviour
             }
             case EffectType.AddingTime:
             {
-                times = _effects[index].times + effect.times;
+                times += _effects[index].times;
                 break;
             }
             case EffectType.Replace:
             {
-                times = effect.times;
+
                 break;
             }
         }
@@ -96,10 +96,12 @@ public class EffectManager : MonoBehaviour
 
     public void Clear()
     {
+        int i = 0;
         while(_effects.Count != 0)
         {
             var effect = _effects[0];
             RemoveEffect(effect, 0);
+            Debug.Log(i++);
         }
     }
 }
