@@ -10,7 +10,9 @@ public class SceneLoader : MonoBehaviour
    public void LoadNextScene()
    {
       int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+      EffectManager.Instance.Clear();
       SceneManager.LoadScene(currentSceneIndex + 1);
+      
    }
 
    // loads scene by its name

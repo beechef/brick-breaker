@@ -6,6 +6,7 @@ public class GameConfig
 {
     // state
     public static readonly string[] AllowedGameModes = {"easy", "normal", "hard", "inhuman"};
+
     public string GameMode
     {
         get => _gameMode;
@@ -13,15 +14,17 @@ public class GameConfig
         {
             if (!AllowedGameModes.Contains(value))
                 throw new Exception("Unexpected Game Mode!");
-            
+
             _gameMode = value;
         }
     }
+
     private string _gameMode = "normal";
-    
+
     // singleton
     private static readonly object padlock = new object();
     private static GameConfig _instance = null;
+
     public static GameConfig Instance
     {
         get
@@ -41,17 +44,17 @@ public class GameConfig
      */
     private GameConfig()
     {
-        
     }
-    
+
     /**
      * Returns the game mode variables based on the current difficulty.
      */
     public Dictionary<string, object> GetGameModeConfig()
     {
-        var gameModeConfig = new Dictionary<string, object>();
-        
-        if(this._gameMode == "easy")
+        var gameModeConfig = new Dictionary<string, object> {{"playerMaxLives", 5}};
+
+
+        if (this._gameMode == "easy")
         {
             gameModeConfig.Add("playerLives", 3);
             gameModeConfig.Add("gameSpeed", 0.6f);
@@ -74,15 +77,14 @@ public class GameConfig
             gameModeConfig.Add("playerLives", 1);
             gameModeConfig.Add("gameSpeed", 1.4f);
             gameModeConfig.Add("pointsPerBlock", 500);
-            
         }
 
         // regardless of the game play mode 
         gameModeConfig.Add("playerScore", 0);
-        
+
         // initial level
         gameModeConfig.Add("gameLevel", 1);
-        
+
         return gameModeConfig;
     }
 }

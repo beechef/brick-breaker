@@ -1,0 +1,11 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/.idea.brick-breaker.iml
+/modules.xml
+/projectSettingsUpdater.xml
+/contentModel.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../:\Users\Admins\Desktop\Unity\Training\brick-breaker\.idea\.idea.brick-breaker\.idea/dataSources/
+/dataSources.local.xml

@@ -15,26 +15,27 @@ public class GameSession : MonoBehaviour
     public int GameLevel { get; set; }
     public int PlayerScore { get; set; }
     public int PlayerLives { get; set; }
+    public int PlayerMaxLives { get; set; }
     public int PointsPerBlock { get; set; }
     public float GameSpeed { get; set; }
-    
+
     /**
      * Singleton implementation.
      */
-    private void Awake() 
-    { 
+    private void Awake()
+    {
         // this is not the first instance so destroy it!
         if (_instance != null && _instance != this)
-        { 
+        {
             Destroy(this.gameObject);
             return;
         }
-        
+
         // first instance should be kept and do NOT destroy it on load
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
-    
+
     /**
      * Before first frame.
      */
@@ -51,7 +52,7 @@ public class GameSession : MonoBehaviour
     void Update()
     {
         Time.timeScale = this.GameSpeed;
-        
+
         // UI updates
         playerScoreText.text = this.PlayerScore.ToString();
         gameLevelText.text = this.GameLevel.ToString();

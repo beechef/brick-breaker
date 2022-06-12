@@ -23,7 +23,7 @@ public class GameSessionLoader : MonoBehaviour
     private void StartGameSession()
     {
         var gameModeConfig = this._gameConfig.GetGameModeConfig();
-        
+        this._gameSession.PlayerMaxLives = (int) gameModeConfig["playerMaxLives"];
         this._gameSession.PlayerLives = (int) gameModeConfig["playerLives"];
         this._gameSession.PointsPerBlock = (int) gameModeConfig["pointsPerBlock"];
         this._gameSession.GameSpeed = (float) gameModeConfig["gameSpeed"];

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Block : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class Block : MonoBehaviour
 
     // state
     private int _currentHits = 0;
+
+    [SerializeField] private float itemDropRate = 10f;
+    [SerializeField] private List<GameObject> dropItems; 
     
     void Start()
     {
@@ -109,6 +113,10 @@ public class Block : MonoBehaviour
 
         // plays destroyed block sound SFX
         AudioSource.PlayClipAtPoint(destroyedBlockSound, _soundPosition, soundVolume);
+
+        DropItem();
+        
+        
         Destroy(this.gameObject);
     }
 
@@ -122,5 +130,18 @@ public class Block : MonoBehaviour
         Quaternion blockRotation = this.transform.rotation;
         
         GameObject destroyedBlockParticles = Instantiate(destroyedBlockParticlesVFX, blockPosition, blockRotation);
+    }
+
+    private bool SimpleRandom(float rate, float maxRate)
+    {
+        return Random.Range(0, maxRate) <= rate;
+    }
+    private void DropItem()
+    {
+        if (SimpleRandom(itemDropRate, 100))
+        {
+            int index = Random.Range(0, dropItems.Count);
+            Instantiate(dropItems[index]).transform.position = transform.position;
+        }
     }
 }
