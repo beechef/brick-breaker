@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UI.LevelMap;
 
 public class GameConfig
 {
@@ -83,7 +84,7 @@ public class GameConfig
         gameModeConfig.Add("playerScore", 0);
 
         // initial level
-        gameModeConfig.Add("gameLevel", 1);
+        gameModeConfig.Add("gameLevel", MapManager.Instance.CurrentLevel);
 
         return gameModeConfig;
     }

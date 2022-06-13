@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using UI.LevelMap;
 using UnityEngine;
 
 public class GameSession : MonoBehaviour
@@ -12,7 +13,7 @@ public class GameSession : MonoBehaviour
     private static GameSession _instance;
     public static GameSession Instance => _instance;
 
-    public int GameLevel { get; set; }
+    public int GameLevel => MapManager.Instance.CurrentLevel;
     public int PlayerScore { get; set; }
     public int PlayerLives { get; set; }
     public int PlayerMaxLives { get; set; }
@@ -44,6 +45,7 @@ public class GameSession : MonoBehaviour
         playerScoreText.text = this.PlayerScore.ToString();
         gameLevelText.text = this.GameLevel.ToString();
         playerLivesText.text = this.PlayerLives.ToString();
+        StartGameSession();
     }
 
     /**
@@ -67,5 +69,16 @@ public class GameSession : MonoBehaviour
     {
         this.PlayerScore += blockMaxHits * this.PointsPerBlock;
         playerScoreText.text = this.PlayerScore.ToString();
+    }
+    
+    public void StartGameSession()
+    {
+        var gameModeConfig = GameConfig.Instance.GetGameModeConfig();
+        PlayerMaxLives = (int) gameModeConfig["playerMaxLives"];
+        PlayerLives = (int) gameModeConfig["playerLives"];
+        PointsPerBlock = (int) gameModeConfig["pointsPerBlock"];
+        GameSpeed = (float) gameModeConfig["gameSpeed"];
+        PlayerScore = (int) gameModeConfig["playerScore"];
+        // GameLevel = (int) gameModeConfig["gameLevel"];
     }
 }
