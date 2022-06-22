@@ -116,9 +116,12 @@ public class Block : MonoBehaviour
         AudioSource.PlayClipAtPoint(destroyedBlockSound, _soundPosition, soundVolume);
 
         DropItem();
+
+        GameObject o;
+        (o = gameObject).GetComponent<SpriteRenderer>().sprite = damageSprites[0];
+        BlockLoader.Instance.Return(o);   
         
-        
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
     }
 
     /**
@@ -145,10 +148,5 @@ public class Block : MonoBehaviour
             var item = Instantiate(dropItems[index], GameObject.FindWithTag("DropItemZone").transform, true);
             item.transform.position = transform.position;
         }
-    }
-
-    private void OnDestroy()
-    {
-        BlockLoader.Instance.Return(gameObject);
     }
 }
