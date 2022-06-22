@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Block : MonoBehaviour
 {
-    
     // configuration
     [SerializeField] public AudioClip destroyedBlockSound;
     [SerializeField] public float soundVolume = 0.05f;
@@ -141,7 +142,13 @@ public class Block : MonoBehaviour
         if (SimpleRandom(itemDropRate, 100))
         {
             int index = Random.Range(0, dropItems.Count);
-            Instantiate(dropItems[index]).transform.position = transform.position;
+            var item = Instantiate(dropItems[index], GameObject.FindWithTag("DropItemZone").transform, true);
+            item.transform.position = transform.position;
         }
+    }
+
+    private void OnDestroy()
+    {
+        BlockLoader.Instance.Return(gameObject);
     }
 }

@@ -28,7 +28,7 @@ public class Paddle : MonoBehaviour
     void Update()
     {
         var relativePosX = ConvertPixelToRelativePosition(
-            pixelPosition: Input.mousePosition.x * (moveSpeed + addingMoveSpeed) * _speedUnit, Screen.width);
+            pixelPosition: Input.mousePosition.x * (moveSpeed + addingMoveSpeed) * _speedUnit - 16, Screen.width);
         transform.position = GetUpdatedPaddlePosition(relativePosX);
     }
 
@@ -36,7 +36,7 @@ public class Paddle : MonoBehaviour
     {
         // clamps the X position
         float clampedRelativePosX = Mathf.Clamp(relativePosX, minRelativePosX, maxRelativePosX);
-
+        
         Vector2 newPaddlePosition = new Vector2(clampedRelativePosX, fixedRelativePosY);
         return newPaddlePosition;
     }

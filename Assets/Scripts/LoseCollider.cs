@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoseCollider : MonoBehaviour
 {
     private readonly string GAME_OVER_SCENE_NAME = "Scenes/GameOver";
-    
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
         // ball triggered an event with the lose collider 
-        if (other.name.ToLower() == "ball")
+        if (other.collider.name.ToLower() == "ball")
         {
             var gameSession = GameSession.Instance;
             
@@ -28,6 +26,7 @@ public class LoseCollider : MonoBehaviour
             
         }
     }
+
 
     private void FixBallOnPaddleAfterLoss()
     {

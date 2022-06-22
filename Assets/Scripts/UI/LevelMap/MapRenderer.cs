@@ -92,7 +92,7 @@ namespace UI.LevelMap
         {
             if (_isLock) return;
             MapManager.Instance.CurrentLevel = _level;
-            SceneManager.LoadScene($"Level{_level}");
+            SceneManager.LoadScene($"Level");
         }
     }
 }

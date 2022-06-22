@@ -45,7 +45,12 @@ public class Ball : MonoBehaviour
         FixBallOnTopOfPaddle(paddlePosition, _initialDistanceToTopOfPaddle);
         ShootBallOnClick(initialBallSpeed, hasMouseClick);
     }
-    
+
+    public void ResetPosition()
+    {
+        var paddlePosition = _paddle.transform.position;
+        FixBallOnTopOfPaddle(paddlePosition, _initialDistanceToTopOfPaddle);
+    }
     /**
      * Fixes the ball on top of the paddle before the first mouse click.
      */

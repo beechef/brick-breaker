@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cde6ab6c863741428d51d120c18cca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRelativePosX: 1
-  maxRelativePosX: 15
-  fixedRelativePosY: 0.64
+  minRelativePosX: -12
+  maxRelativePosX: 8.5
+  fixedRelativePosY: -5
   screenWidthUnits: 16
   moveSpeed: 5
   addingMoveSpeed: 0

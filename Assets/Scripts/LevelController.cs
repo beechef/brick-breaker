@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UI.LevelMap;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
@@ -41,10 +37,9 @@ public class LevelController : MonoBehaviour
 
             // increases game level
             MapManager.Instance.SetVictory(gameSession.GameLevel);
-            // gameSession.GameLevel++;
-            gameSession.StartGameSession();
-            
-            _sceneLoader.LoadNextScene();
+            gameSession.GameSpeed = 0;
+               
+            _sceneLoader.LoadLevel(MapManager.Instance.CurrentLevel);
         }
     }
     

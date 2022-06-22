@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdd846b6396e41a8a0438d2463793cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockLoader: {fileID: 0}
   destroyedBlockSound: {fileID: 8300000, guid: 5023d9c2017a3402388f883d5ea3442c, type: 3}
   soundVolume: 0.2
   destroyedBlockParticlesVFX: {fileID: 4668744615842279802, guid: 763fbccf87ffe4cab81bb6cf610ab765,

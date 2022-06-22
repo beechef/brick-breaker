@@ -45,7 +45,6 @@ public class GameSession : MonoBehaviour
         playerScoreText.text = this.PlayerScore.ToString();
         gameLevelText.text = this.GameLevel.ToString();
         playerLivesText.text = this.PlayerLives.ToString();
-        StartGameSession();
     }
 
     /**
@@ -71,14 +70,10 @@ public class GameSession : MonoBehaviour
         playerScoreText.text = this.PlayerScore.ToString();
     }
     
-    public void StartGameSession()
+    public void StartGameSession(int playerLives, float gameSpeed)
     {
-        var gameModeConfig = GameConfig.Instance.GetGameModeConfig();
-        PlayerMaxLives = (int) gameModeConfig["playerMaxLives"];
-        PlayerLives = (int) gameModeConfig["playerLives"];
-        PointsPerBlock = (int) gameModeConfig["pointsPerBlock"];
-        GameSpeed = (float) gameModeConfig["gameSpeed"];
-        PlayerScore = (int) gameModeConfig["playerScore"];
-        // GameLevel = (int) gameModeConfig["gameLevel"];
+        PlayerMaxLives = 5;
+        PlayerLives = playerLives;
+        GameSpeed = gameSpeed;
     }
 }

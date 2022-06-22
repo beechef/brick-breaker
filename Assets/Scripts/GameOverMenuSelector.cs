@@ -34,7 +34,7 @@ public class GameOverMenuSelector : VerticalMenuSelector
         GameObject currentMenu = this.GetCurrentMenu();
 
         if (currentMenu.name == this.MENU_OPTION_GO_AGAIN) 
-            this.sceneLoader.LoadStartScene();
+            this.sceneLoader.LoadLevel(MapManager.Instance.CurrentLevel);
         else 
             this.sceneLoader.Quit();
     }
