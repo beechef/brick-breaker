@@ -1,8 +1,6 @@
-﻿using System.IO;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Effects;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utilities;
 
 public class SceneLoader : MonoBehaviour
