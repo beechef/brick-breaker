@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.grashaar.unity-objectpooling": "https://github.com/grashaar/Unity.ObjectPooling.git",
+    "com.grashaar.unity-objectpooling": "https://github.com/felixngd/Unity.ObjectPooling.git",
     "com.laicasaane.unity-supplements": "2.6.0",
     "com.unity.2d.animation": "7.0.5",
     "com.unity.2d.pixel-perfect": "5.0.1",

@@ -8,13 +8,13 @@
       "hash": "9e2163616b9c527fa9461544e2bcc5f93fd12d83"
     },
     "com.grashaar.unity-objectpooling": {
-      "version": "https://github.com/grashaar/Unity.ObjectPooling.git",
+      "version": "https://github.com/felixngd/Unity.ObjectPooling.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.laicasaane.unity-supplements": "2.5.3"
+        "com.laicasaane.unity-supplements": "2.6.0"
       },
-      "hash": "9812cca48c0195690c99eb5430176deb250981ae"
+      "hash": "63e7a981917249fbf5f9e6df047dc857d742ffda"
     },
     "com.laicasaane.unity-supplements": {
       "version": "2.6.0",
