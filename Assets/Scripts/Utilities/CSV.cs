@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using UnityEngine;
 
 namespace Utilities
 {
@@ -13,30 +13,31 @@ namespace Utilities
             CSV csv = new CSV();
             int[,] returnData = new int[MAXRow, MAXCol];
             int rowCount = 0;
-            StreamReader streamReader = new StreamReader(path);
-
+            var data = Resources.Load<TextAsset>(path);
+            var splitData = data.text.Split("\n");
             while (true)
             {
-                string readData = streamReader.ReadLine();
-
-                if (readData == null || rowCount > MAXRow - 1)
+                if (rowCount > MAXRow - 1 || rowCount > splitData.Length - 1)
                 {
                     break;
                 }
 
+                string readData = splitData[rowCount];
+                
                 string[] splitReadData = readData.Split(",");
-
                 for (int i = 0; i < MAXCol; i++)
                 {
+                    if (splitReadData.Length <= i) break;
                     string tmpData = splitReadData[i];
                     if (tmpData.Equals("")) continue;
-                    returnData[rowCount, i] = int.Parse(tmpData);
+                    int.TryParse(tmpData, out returnData[rowCount, i]);
                 }
 
                 rowCount++;
             }
 
             csv.data = returnData;
+            Resources.UnloadAsset(data);
             return csv;
         }
 

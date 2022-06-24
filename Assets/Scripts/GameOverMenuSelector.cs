@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverMenuSelector : VerticalMenuSelector
 {
@@ -20,7 +21,7 @@ public class GameOverMenuSelector : VerticalMenuSelector
     void Update()
     {
         // invokes base class up/down arrows handling
-        this.HandleUpDownArrowPresses();
+        HandleUpDownArrowPresses();
         
         // enter case handling
         if (Input.GetKeyDown(KeyCode.Return)) HandleReturn();
@@ -31,11 +32,11 @@ public class GameOverMenuSelector : VerticalMenuSelector
      */
     private void HandleReturn()
     {
-        GameObject currentMenu = this.GetCurrentMenu();
+        GameObject currentMenu = GetCurrentMenu();
 
-        if (currentMenu.name == this.MENU_OPTION_GO_AGAIN) 
-            this.sceneLoader.LoadLevel(MapManager.Instance.CurrentLevel);
-        else 
-            this.sceneLoader.Quit();
+        if (currentMenu.name == MENU_OPTION_GO_AGAIN)
+            SceneManager.LoadScene("Level");
+        else
+            Application.Quit();
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using UI.LevelMap;
-using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
-using Utilities;
 
 public class MapManager : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class MapManager : MonoBehaviour
         _maps = LoadMap();
     }
 
-    public List<Map> LoadMap()
+    private List<Map> LoadMap()
     {
         List<Map> maps = JsonConvert.DeserializeObject<List<Map>>(PlayerPrefs.GetString(MapLocation));
         if (maps == null)
@@ -58,11 +57,12 @@ public class MapManager : MonoBehaviour
                 HighestLevel = map.level;
         }
 
-        // starCountController.Render();
+        if (starCountController != null)
+            starCountController.Render();
         return maps;
     }
 
-    public void SaveMap()
+    private void SaveMap()
     {
         PlayerPrefs.SetString(MapLocation, JsonConvert.SerializeObject(_maps));
     }

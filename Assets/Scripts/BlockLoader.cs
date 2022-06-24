@@ -9,6 +9,8 @@ public class BlockLoader : MonoBehaviour
     private static BlockLoader _instance;
     public static BlockLoader Instance => _instance;
 
+    [SerializeField] private LevelController levelController;
+
     private void Awake()
     {
         if (_instance != null) return;
@@ -27,6 +29,7 @@ public class BlockLoader : MonoBehaviour
 
     public async UniTask LoadBlock(CSV data)
     {
+        int blocksCounter = 0;
         for (int i = 1; i < CSV.MAXRow; i++)
         {
             var row = data.GetRow(i);
@@ -48,16 +51,19 @@ public class BlockLoader : MonoBehaviour
                     case 1:
                     {
                         blockName = "BlockHit1";
+                        blocksCounter++;
                         break;
                     }
                     case 2:
                     {
                         blockName = "BlockHit2";
+                        blocksCounter++;
                         break;
                     }
                     case 3:
                     {
                         blockName = "BlockHit6";
+                        blocksCounter++;
                         break;
                     }
                     default:
@@ -66,7 +72,7 @@ public class BlockLoader : MonoBehaviour
                         break;
                     }
                 }
-
+                levelController.SetBlockCounter(blocksCounter);
                 if (blockName == null) continue;
                 var block = await spawner.GetAsync(blockName);
 

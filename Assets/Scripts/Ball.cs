@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public class Ball : MonoBehaviour
 {
     // constants
-    private const int MOUSE_PRIMARY_BUTTON = 0;
+    private const int MousePrimaryButton = 0;
     
     // fields
     [SerializeField] private Vector2 initialBallSpeed = new Vector2(2f, 10f);
@@ -39,7 +39,7 @@ public class Ball : MonoBehaviour
         // if ball has been shot, no locking or shooting it again!
         if (HasBallBeenShot) return;
         
-        var hasMouseClick = Input.GetMouseButtonDown(MOUSE_PRIMARY_BUTTON);
+        var hasMouseClick = Input.GetMouseButtonDown(MousePrimaryButton);
         var paddlePosition = _paddle.transform.position;
             
         FixBallOnTopOfPaddle(paddlePosition, _initialDistanceToTopOfPaddle);
@@ -62,7 +62,7 @@ public class Ball : MonoBehaviour
     /**
      * Shoots the ball for the first time upon the first mouse click.
      */
-    public void ShootBallOnClick(Vector2 initialBallSpeed, bool hasMouseClick)
+    private void ShootBallOnClick(Vector2 initialBallSpeed, bool hasMouseClick)
     {
         if (!hasMouseClick) return;
         

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Cysharp.Threading.Tasks;
 using Effects;
 using UnityEngine;
@@ -33,37 +30,13 @@ public class SceneLoader : MonoBehaviour
             Destroy(dropItemZoneTransform.GetChild(i).gameObject);
         }
 
-        var path = Path.Combine(Application.dataPath, "Level Data", $"level_{level}.csv");
+        EffectManager.Instance.Clear();
+
+        var path = $"Level/level_{level}";
 
         CSV csv = CSV.ReadCSV(path);
         GameSession.Instance.StartGameSession(csv.data[0, 0], csv.data[0, 1]);
         BlockLoader.Instance.LoadBlock(csv).Forget();
-    }
-
-    // loads next scene based on the scene ordering defined on Unity > build settings
-    public void LoadNextScene()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        EffectManager.Instance.Clear();
-        SceneManager.LoadScene(currentSceneIndex + 1);
-    }
-
-    // loads scene by its name
-    public void LoadSceneByName(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName: sceneName);
-    }
-
-    // always the 0 indexed scene
-    public void LoadStartScene()
-    {
-        // FindObjectOfType<GameState>().ResetState();
-        SceneManager.LoadScene(0);
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 
     /**

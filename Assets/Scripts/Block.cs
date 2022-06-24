@@ -27,9 +27,7 @@ public class Block : MonoBehaviour
         // selects other game object without SCENE binding: programatically via API
         _levelController = FindObjectOfType<LevelController>();
         _soundPosition = FindObjectOfType<Camera>().transform.position;
-
-        // increment the block counter if the block's breakable
-        if (CompareTag("Breakable")) _levelController.IncrementBlocksCounter();
+        
     }
     
     /**
@@ -58,9 +56,9 @@ public class Block : MonoBehaviour
      */
     private void UpdateSpriteIfTooDamaged()
     {
-        var ix = GetDamageSpriteIndex(this._currentHits, this.maxHits, this.damageSprites.Length);
+        var ix = GetDamageSpriteIndex(_currentHits, maxHits, damageSprites.Length);
 
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = damageSprites[ix];
+        gameObject.GetComponent<SpriteRenderer>().sprite = damageSprites[ix];
     }
     
     /**
@@ -117,11 +115,11 @@ public class Block : MonoBehaviour
 
         DropItem();
 
-        GameObject o;
-        (o = gameObject).GetComponent<SpriteRenderer>().sprite = damageSprites[0];
-        BlockLoader.Instance.Return(o);   
+        gameObject.GetComponent<SpriteRenderer>().sprite = damageSprites[0];
+        _currentHits = 0;
+        BlockLoader.Instance.Return(gameObject);   
         
-        // Destroy(this.gameObject);
+        // Destroy(gameObject);
     }
 
     /**
@@ -130,8 +128,8 @@ public class Block : MonoBehaviour
     private void ShowDestroyedBlockParticles()
     {
         // using Unity's API to instantiate a new GameObject -- the particles VFX
-        Vector3 blockPosition = this.transform.position;
-        Quaternion blockRotation = this.transform.rotation;
+        Vector3 blockPosition = transform.position;
+        Quaternion blockRotation = transform.rotation;
         
         GameObject destroyedBlockParticles = Instantiate(destroyedBlockParticlesVFX, blockPosition, blockRotation);
     }

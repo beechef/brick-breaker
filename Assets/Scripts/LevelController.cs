@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -16,9 +17,9 @@ public class LevelController : MonoBehaviour
         _sceneLoader = FindObjectOfType<SceneLoader>();
     }
 
-    public void IncrementBlocksCounter()
+    public void SetBlockCounter(int blocksCounter)
     {
-        blocksCounter++;
+        this.blocksCounter = blocksCounter;
     }
     
     public void DecrementBlocksCounter()
@@ -32,7 +33,7 @@ public class LevelController : MonoBehaviour
             // check for game over
             if (gameSession.GameLevel >= MapCount)
             {
-                _sceneLoader.LoadSceneByName(GAME_OVER_SCENE_NAME);
+                SceneManager.LoadScene(GAME_OVER_SCENE_NAME);
             }
 
             // increases game level

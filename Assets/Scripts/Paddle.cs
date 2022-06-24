@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Drawing;
+using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
     [SerializeField] public float minRelativePosX = 1f; // assumes paddle size of 1 relative unit
 
-    private float _baseMinRelativePosX = 0f;
     [SerializeField] public float maxRelativePosX = 15f; // assumes paddle size of 1 relative unit
-    private float _baseMaxRelativePosX = 16f;
 
     [SerializeField] public float fixedRelativePosY = .64f; // paddle does not move on the Y directiob
 
@@ -17,19 +16,22 @@ public class Paddle : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float addingMoveSpeed;
 
+    private Camera _camera;
+    public float sensitive = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
-        float startPosX = ConvertPixelToRelativePosition(screenWidthUnits / 2, Screen.width);
-        transform.position = GetUpdatedPaddlePosition(startPosX);
+        _camera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var relativePosX = ConvertPixelToRelativePosition(
-            pixelPosition: Input.mousePosition.x * (moveSpeed + addingMoveSpeed) * _speedUnit - 16, Screen.width);
-        transform.position = GetUpdatedPaddlePosition(relativePosX);
+        Vector2 mousePos = Input.mousePosition;
+        mousePos.x *= (moveSpeed + addingMoveSpeed) * _speedUnit;
+
+        transform.position = GetUpdatedPaddlePosition(_camera.ScreenToWorldPoint(mousePos).x);
     }
 
     public Vector2 GetUpdatedPaddlePosition(float relativePosX)
@@ -40,13 +42,7 @@ public class Paddle : MonoBehaviour
         Vector2 newPaddlePosition = new Vector2(clampedRelativePosX, fixedRelativePosY);
         return newPaddlePosition;
     }
-
-    public float ConvertPixelToRelativePosition(float pixelPosition, int screenWidth)
-    {
-        var relativePosition = pixelPosition / screenWidth * screenWidthUnits;
-        return relativePosition;
-    }
-
+    
     public void ExpandPaddle(float value)
     {
         Vector3 localScale = transform.localScale;

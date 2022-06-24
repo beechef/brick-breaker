@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
+    private static readonly int MAXLives = 5;
     // config
     [SerializeField] private TextMeshProUGUI playerScoreText;
     [SerializeField] private TextMeshProUGUI gameLevelText;
@@ -16,8 +17,7 @@ public class GameSession : MonoBehaviour
     public int GameLevel => MapManager.Instance.CurrentLevel;
     public int PlayerScore { get; set; }
     public int PlayerLives { get; set; }
-    public int PlayerMaxLives { get; set; }
-    public int PointsPerBlock { get; set; }
+    public int PlayerMaxLives { get; private set; }
     public float GameSpeed { get; set; }
 
     /**
@@ -28,13 +28,13 @@ public class GameSession : MonoBehaviour
         // this is not the first instance so destroy it!
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
 
         // first instance should be kept and do NOT destroy it on load
         _instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     /**
@@ -42,9 +42,9 @@ public class GameSession : MonoBehaviour
      */
     void Start()
     {
-        playerScoreText.text = this.PlayerScore.ToString();
-        gameLevelText.text = this.GameLevel.ToString();
-        playerLivesText.text = this.PlayerLives.ToString();
+        playerScoreText.text = PlayerScore.ToString();
+        gameLevelText.text = GameLevel.ToString();
+        playerLivesText.text = PlayerLives.ToString();
     }
 
     /**
@@ -52,12 +52,12 @@ public class GameSession : MonoBehaviour
      */
     void Update()
     {
-        Time.timeScale = this.GameSpeed;
+        Time.timeScale = GameSpeed;
 
         // UI updates
-        playerScoreText.text = this.PlayerScore.ToString();
-        gameLevelText.text = this.GameLevel.ToString();
-        playerLivesText.text = this.PlayerLives.ToString();
+        playerScoreText.text = PlayerScore.ToString();
+        gameLevelText.text = GameLevel.ToString();
+        playerLivesText.text = PlayerLives.ToString();
     }
 
     /**
@@ -66,13 +66,14 @@ public class GameSession : MonoBehaviour
      */
     public void AddToPlayerScore(int blockMaxHits)
     {
-        this.PlayerScore += blockMaxHits * this.PointsPerBlock;
-        playerScoreText.text = this.PlayerScore.ToString();
+        PlayerScore += blockMaxHits;
+        playerScoreText.text = PlayerScore.ToString();
     }
     
     public void StartGameSession(int playerLives, float gameSpeed)
     {
-        PlayerMaxLives = 5;
+        PlayerMaxLives = MAXLives;
+        PlayerScore = 0;
         PlayerLives = playerLives;
         GameSpeed = gameSpeed;
     }

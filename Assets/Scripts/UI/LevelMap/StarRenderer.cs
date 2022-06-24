@@ -7,11 +7,6 @@ namespace UI.LevelMap
     {
         [SerializeField] private Image[] stars;
 
-        private void Start()
-        {
-            // ResetStar();
-        }
-
         private void ResetStar()
         {
             foreach (var star in stars)
